@@ -1,16 +1,11 @@
-//var app = angular.module('store',[]);
+
 
 (function () 
 {
-    var app = angular.module('gemStore', []);
+    var app = angular.module('gemStore', ['store-products']);
 
 
-    app.directive('productTitle', function(){
-        return {
-            restrict:'E',
-            templateUrl:'product-title.html'
-        };
-    });
+    
 
     app.controller('StoreController', function () {
         this.products = gems;
@@ -25,22 +20,6 @@
         };
     });
 
-    app.controller('PanelController', function(){
-        this.tab=1;
-
-    this.selectTab = function(setTab)
-    {
-        this.tab = setTab;
-    };
-
-    this.isSelected = function(checkTab)
-    {
-        return this.tab==checkTab;
-
-    };
-
-    });
-
     var gems =
     [ 
         {
@@ -53,19 +32,18 @@
             {full:"http://lorempixel.com/100/100/cats/3"}
         ],
         reviews:[]
-    },
-    {
-        name: 'Pentagon Gem',
-        price: 5.95,
-        description: 'this is the desc',
-        canPurchase:true,
-        soldOut:false,
-        images:[
-            {full:"http://lorempixel.com/100/100/cats/4"}
-        ],
-        reviews:[]
-
-    }
-]
+        },
+        {
+            name: 'Pentagon Gem',
+            price: 5.95,
+            description: 'this is the desc',
+            canPurchase:true,
+            soldOut:false,
+            images:[
+                {full:"http://lorempixel.com/100/100/cats/4"}
+            ],
+            reviews:[]
+        }
+    ];
 }
 )();
