@@ -1,0 +1,99 @@
+﻿<!DOCTYPE html>
+<html ng-app="gemStore">
+
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+        crossorigin="anonymous">
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+        crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+
+<body>
+    <script src="angular.min.js"></script>
+    <script src="app.js"></script>
+    <h1>hello from angular codeschoool</h1>
+
+    <div ng-controller="StoreController as store">
+
+
+        <div class="prodDiv" ng-repeat="product in store.products" ng-hide="product.soldOut">
+            <h1>{{product.name}}</h1>
+            <h3>{{product.price | currency:"£"}}</h3>
+            <img src="spinner.gif" ng-src="{{product.images[0].full}}">
+            <button ng-show="product.canPurchase">Add to Cart</button>
+
+            <section ng-controller="PanelController as panel">
+                <ul class="nav nav-pills">
+                    <li ng-class="{active:panel.isSelected(1)}">
+                        <a href ng-click="panel.selectTab(1)">Description</a></li>
+                        <li ng-class="{active:panel.isSelected(2)}">
+                        <a href ng-click="panel.selectTab(2)">Specifications</a></li>
+                        <li ng-class="{active:panel.isSelected(3)}">
+                        <a href ng-click="panel.selectTab(3)">Reviews</a>  </li>
+                </ul>
+            
+                        <div class="panel" ng-show="panel.isSelected(1)">
+                    <h4>Description</h4><blockquote>None Yet</blockquote>
+            </div>
+            <div class="panel" ng-show="panel.isSelected(2)">
+                    <h4>Specifications</h4><blockquote>None Yet</blockquote>
+            </div>
+            <div class="panel" ng-show="panel.isSelected(3)">
+                    <h4>Reviews</h4>
+                    <blockquote ng-repeat="review in product.reviews">
+                       <b>{{review.stars}} stars</b> {{review.body}}
+                    </blockquote>
+                    
+                    
+                    <br>
+                    
+                    <form name="reviewForm" ng-controller="ReviewController as reviewCtrl" ng-submit="reviewForm.$valid && reviewCtrl.addReview(product)" novalidate>
+                    <blockquote>
+                        <b>Stars : {{reviewCtrl.review.stars}} stars</b>
+                        {{reviewCtrl.review.body}}
+                        <cite>{{reviewCtrl.review.author}}</cite>
+                    </blockquote>
+                        
+                    <select ng-model="reviewCtrl.review.stars " required>
+                            <option value="1">1 star</option>
+                            <option value="2">2 stars</option>
+                            <option value="3">3 stars</option>
+                            <option value="4">4 stars</option>
+                            <option value="5">5 stars</option>
+                        </select>
+                        <textarea ng-model="reviewCtrl.review.body " required>
+
+                        </textarea>
+                        <label >by:</label>
+                        <input type="email" ng-model="reviewCtrl.review.author">
+
+                        <div>review form is {{reviewForm.$valid}}</div>
+                        <input type="submit" value="Submit">
+                    </form>
+            </div>
+            
+            
+            </section>
+
+
+
+
+            <hr>
+        </div>
+
+
+    </div>
+    <p>
+        I am {{2017-1975}}
+    </p>
+</body>
+
+</html>

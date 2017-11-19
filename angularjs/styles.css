@@ -1,0 +1,14 @@
+.prodDiv{
+
+    border:1px dotted gray;
+    margin:5px;
+    padding:5px;
+}
+
+.ng-invalid.ng-dirty {
+    border:solid 2px red;
+}
+
+.ng-valid.ng-dirty {
+    border:solid 2px green;
+}
